@@ -1,0 +1,79 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <div class="site-wrap">
+
+        <div class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0"><a href="{% url 'index' %}">Home</a> <span class="mx-2 mb-0">/</span>
+                        <strong class="text-black">Tank Top T-Shirt</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{product.product_image.url}}" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="text-black">{{product.product_title}}</h2>
+                        <p class="mb-4">{{product.product_category}}</p>
+                        <p class="mb-4">{{product.product_desc}}</p>
+                        <p><strong class="text-primary h4">{{product.product_price}}</strong></p>
+                        {% if request.session.email %}
+                        <p>
+                            {% if cart_flag %}
+                                <a href="{% url 'remove_from_cart' pk=product.pk %}" class="buy-now btn btn-sm btn-danger">Remove From cart</a>
+                            {% else %}
+                                <a href="{% url 'add_to_cart' pk=product.pk %}" class="buy-now btn btn-sm btn-danger">Add To cart</a>
+                            {% endif %}
+                            {% if wishlist_flag %}
+                                <a href="{% url 'remove_from_wishlist' pk=product.pk %}" class="buy-now btn btn-sm btn-danger">Remove From Wishlist</a>
+                            {% else %}
+                                <a href="{% url 'add_to_wishlist' pk=product.pk %}" class="buy-now btn btn-sm btn-danger">Add To Wishlist</a>
+                            {% endif %}
+                        </p>
+                        {% else %}
+                        <p>
+                            <a href="{% url 'login' %}" class="buy-now btn btn-sm btn-primary">Login</a>
+                        </p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

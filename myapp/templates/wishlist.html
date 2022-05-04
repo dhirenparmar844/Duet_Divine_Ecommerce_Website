@@ -1,0 +1,80 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+  </head>
+  <body>
+  
+  <div class="site-wrap">
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="{% url 'index' %}">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+        </div>
+      </div>
+    </div>
+    {% if wishlist %}
+    <div class="site-section">
+      <div class="container">
+
+        <div class="row mb-5">
+          <div class="col-md-9 order-2">
+
+            <div class="row">
+              <div class="col-md-12 mb-5">
+                <div class="float-md-left mb-4"><h2 class="text-black h5">Wishlist</h2></div>
+              </div>
+            </div>
+            <div class="row mb-5">
+                {% for i in wishlist %}
+                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                  <div class="block-4 text-center border">
+                    <figure class="block-4-image">
+                      <a href="{% url 'product_detail' pk=i.product.pk %}"><img src="{{i.product.product_image.url}}" alt="Image placeholder" class="img-fluid" style="width:250px; height:250px;"></a>
+                    </figure>
+                    <div class="block-4-text p-4">
+                      <h3><a href="{% url 'product_detail' pk=i.product.pk %}">{{i.product.product_name}}</a></h3>
+                      <p class="mb-0">{{i.product.product_category}}</p>
+                      <p class="text-primary font-weight-bold">{{i.product.product_price}}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  {% else %}    
+    <br><br><br><br>
+    <h2 align="center">No Products In Wishlist</h2>
+    <br><br><br><br>
+  {% endif %}
+  </div>   
+  </body>
+</html>
+{% endblock %}
